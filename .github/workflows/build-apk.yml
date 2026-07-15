@@ -8,9 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: android
 
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +18,7 @@ jobs:
           distribution: 'temurin'
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-      - name: Grant execute permission for gradlew
+      - name: Grant execute permission
         run: chmod +x gradlew
       - name: Build Debug APK
         run: ./gradlew assembleDebug
@@ -29,4 +26,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: shop-guide-app
-          path: android/app/build/outputs/apk/debug/*.apk
+          path: app/build/outputs/apk/debug/*.apk
